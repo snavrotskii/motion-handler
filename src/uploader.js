@@ -10,6 +10,7 @@ const service = google.drive({ version: 'v3', auth });
 
 async function upload(path) {
   const filename = path.split('/').pop();
+  console.log(`uploading file ${filename}`)
   const file = await service.files.create({
     resource: {
       name: filename,
@@ -21,6 +22,7 @@ async function upload(path) {
     },
     fields: 'id',
   });
+  console.log(`uploaded file ${filename}`)
   return file.data.id;
 }
 
