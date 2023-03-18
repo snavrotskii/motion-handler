@@ -3,6 +3,8 @@
 When recording an event captured by the IP camera, a video file is saved.
 This script can be used with [motion program](https://motion-project.github.io/) to upload a video file to google drive and send an email notification.
 
+Istall [nodejs](https://nodejs.org/en) to run this script.
+
 For the script to work, you need to add the following environment variables (keep in mind they should be available for service):
 ```
 export EMAIL_TO='...'
