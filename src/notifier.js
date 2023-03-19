@@ -1,5 +1,11 @@
 import { createTransport } from "nodemailer";
 import { createReadStream } from 'fs';
+import { exec } from 'child_process';
+
+let dfResult = '';
+exec('df', (error, stdout) => {
+  dfResult = stdout;
+});
 
 async function notify(path) {
   let transporter = createTransport({
@@ -34,8 +40,8 @@ async function send(path, transporter, emailFrom) {
   await transporter.sendMail({
     from: `${emailFrom}`,
     to: process.env.EMAIL_TO,
-    subject: `Home camera recording ${filename}`,
-    text: `Please find the recording ${filename} in the attachements`,
+    subject: `Home camera motion detected`,
+    text: `Please find the recording ${filename} in the attachements.\n\nDisk info:\n${dfResult}`,
     attachments: [{
       filename: filename,
       content: createReadStream(path)
